@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<seller ID="nam" name="남택일" email="ad2040@gmail.com" />
+	<seller ID="kim" name="김명숙" email="kim@gmail.com" />
+	<seller ID="yoo" name="유태연" email="yoo@gmail.com" />
+</dataset>
