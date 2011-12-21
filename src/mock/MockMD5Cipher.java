@@ -3,15 +3,15 @@ package mock;
 public class MockMD5Cipher implements ICipher {
 
 	@Override
-	public String encrypt(String source) {
+	public String decrypt(String source) {
 		
-		return "nampassword";
+		return "password";
 	}
 
 	@Override
-	public String decrypt(String source) {
+	public String encrypt(String source) {
 		// TODO Auto-generated method stub
-		return "09asdf99999a0asf";
+		return "c6be1a7161beab655ed0c5ffdd133045";
 	}
 
 }
