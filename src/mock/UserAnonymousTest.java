@@ -63,18 +63,6 @@ public class UserAnonymousTest {
 		User user = new User("nam");
 		assertThat("쿠폰수령전", user.getCouponCount(), is(0));
 
-		ICoupon coupon = iCoupon;
-		;
-
-		user.addCoupon(coupon);
-		assertThat("쿠폰수령전", user.getCouponCount(), is(1));
-	}
-
-	@Test
-	public void testAddCoupon_익멸클래스사용() {
-		User user = new User("nam");
-		assertThat("쿠폰수령전", user.getCouponCount(), is(0));
-
 		user.addCoupon(iCoupon);
 		assertThat("쿠폰수령전", user.getCouponCount(), is(1));
 	}
@@ -82,9 +70,7 @@ public class UserAnonymousTest {
 	@Test
 	public void testGetLastOccupiedCoupon() {
 		User user = new User("nam");
-		ICoupon eventCoupon = iCoupon;
-		;
-		user.addCoupon(eventCoupon);
+		user.addCoupon(iCoupon);
 
 		ICoupon lastCoupon = user.getLastOccupiedCoupon();
 
@@ -112,9 +98,9 @@ public class UserAnonymousTest {
 		assertThat("아이템 할인 가능", iCoupon.isApplicable(item), is(true));
 
 		// iCoupon.g
-		 int methodCallCount =iCoupon.getIsApplicableCallCount();
+		int methodCallCount = iCoupon.getIsApplicableCallCount();
 		// int methodCallCount =iCoupon.
-	 assertThat("호출된 회수", methodCallCount, is(1));
+		assertThat("호출된 회수", methodCallCount, is(1));
 	}
 
 }

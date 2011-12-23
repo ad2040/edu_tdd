@@ -12,7 +12,7 @@ public class DatabaseRepository implements Repository {
 	private final String driver= "org.apache.derby.jdbc.EmbeddedDriver";
 	private final String clientDriver= "org.apache.derby.jdbc.ClientDriver";
 	
-	private final String protocalStr = "jdbc:derby://localhost:1527/Sellerdb;create=true;user=nam;pass=nam";
+	private final String url = "jdbc:derby://localhost:1527/Sellerdb;create=true;user=nam;pass=nam";
 //	private final String protocol= "jdbc:derby:";
 //	private final String dbName = "shopdb";
 	private Connection con;
@@ -20,7 +20,8 @@ public class DatabaseRepository implements Repository {
 	
 	public DatabaseRepository() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 		Class.forName(clientDriver).newInstance();
-		con = DriverManager.getConnection(protocalStr);
+		con = DriverManager.getConnection(url);
+		con.commit();
 	}
 
 	@Override
@@ -44,8 +45,8 @@ public class DatabaseRepository implements Repository {
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally{
-			stmt.close();
-			con.close();
+			if(stmt != null){stmt.close();}
+			if(con != null){con.close();}
 		}
 				
 		return seller;

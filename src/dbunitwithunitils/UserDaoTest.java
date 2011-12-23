@@ -30,8 +30,9 @@ public class UserDaoTest {
 	}
 
 	@Test
+	@ExpectedDataSet("Expected_Seller.xml")
 	public void testAdd() throws SQLException {
-		Seller seller = new Seller("park", "¹ÚÀºÁÖ", "park@gmail.com");
+		Seller seller = new Seller("park", "ë°•ì€ì£¼", "park@gmail.com");
 		dao.add(seller);
 
 		// Seller expectedSeller=dao.findById("park");
@@ -48,7 +49,7 @@ public class UserDaoTest {
 	@Test
 	@ExpectedDataSet("Expected_Seller.xml")
 	public void testAddAndFindById() throws SQLException{
-		Seller seller = new Seller("park", "¹ÚÀºÁÖ", "park@gmail.com");
+		Seller seller = new Seller("park", "ë°•ì€ì£¼", "park@gmail.com");
 		dao.add(seller);
 	}
 

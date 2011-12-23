@@ -71,7 +71,16 @@ public class UserDao {
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally{
-			stmt.close();
+			
+			if(stmt != null){
+				try {
+					stmt.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
+				
+			
 			con.close();
 		}
 				

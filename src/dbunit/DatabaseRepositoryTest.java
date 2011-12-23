@@ -17,6 +17,7 @@ import org.dbunit.dataset.SortedTable;
 import org.dbunit.dataset.excel.XlsDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 
@@ -50,8 +51,13 @@ public class DatabaseRepositoryTest {
 		} catch (Exception e) {
 			System.out.println(e);
 		}finally{
-			databaseTester.getConnection().close();
+			//databaseTester.getConnection().close();
 		}
+	}
+	
+	@After
+	public void tearDown() throws SQLException, Exception{
+		databaseTester.getConnection().close();
 	}
 	
 	@Test
@@ -61,9 +67,9 @@ public class DatabaseRepositoryTest {
 	
 	@Ignore@Test
 	public void testFindById() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException{
-		Seller expectedSeller = new Seller("nam", "³²ÅÃÀÏ", "ad2040@gmail.com");
-		Seller expectedSeller1 = new Seller("kim", "±è¸í¼÷", "kim@gmail.com");
-		Seller expectedSeller2 = new Seller("lee", "ÀÌÁ¾¹Î", "lee@gmail.com");
+		Seller expectedSeller = new Seller("nam", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "ad2040@gmail.com");
+		Seller expectedSeller1 = new Seller("kim", "ï¿½ï¿½ï¿½ï¿½", "kim@gmail.com");
+		Seller expectedSeller2 = new Seller("lee", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "lee@gmail.com");
 		
 		
 		
@@ -74,7 +80,7 @@ public class DatabaseRepositoryTest {
 	}
 	@Test
 	public void testAddNewSeller() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException{
-		Seller newSeller = new Seller("park", "¹ÚÀºÁÖ", "park@gmail.com");
+		Seller newSeller = new Seller("park", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "park@gmail.com");
 		repository.add(newSeller);
 		
 		
@@ -86,12 +92,12 @@ public class DatabaseRepositoryTest {
 		
 	}
 	/**
-	 * µ¥ÀÌÅÍ¼ÂÀ» Table·Î ºñ±³
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ Tableï¿½ï¿½ ï¿½ï¿½
 	 * @throws Exception
 	 */
 	@Test
 	public void testAddNewSellerTable() throws Exception{
-		Seller newSeller = new Seller("yoo", "À¯ÅÂ¿¬", "yoo@gmail.com");
+		Seller newSeller = new Seller("yoo", "ìœ íƒœì—°", "yoo@gmail.com");
 		repository.add(newSeller);
 		
 		IDataSet currentDBdataSet = databaseTester.getConnection().createDataSet();
@@ -100,35 +106,35 @@ public class DatabaseRepositoryTest {
 		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(new File("src\\dbunit\\Expected_Seller.xml"));
 		ITable expectedTable = expectedDataSet.getTable("seller");
 		
-//		Assertion.assertEquals(new SortedTable(expectedTable), actualTable);
+		Assertion.assertEquals(new SortedTable(expectedTable), actualTable);
 //		Assertion.assertEquals(expectedTable, actualTable1);
-		assertLenientEquals(expectedTable,actualTable);
+//		assertLenientEquals(expectedTable,actualTable);
 	}
 	
 	/**
-	 * µ¥ÀÌÅÍ¼ÂÀ» Á÷Á¢ ºñ±³
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	 * @throws Exception
 	 */
 	@Test
 	public void testAddNewSellerDataSet() throws Exception{
-		Seller newSeller = new Seller("yoo", "À¯ÅÂ¿¬", "yoo@gmail.com");
+		Seller newSeller = new Seller("yoo", "ìœ íƒœì—°", "yoo@gmail.com");
 		repository.add(newSeller);
 		
 		IDataSet currentDBdataSet = databaseTester.getConnection().createDataSet(new String[] {"seller"});
 		
 		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(new File("src\\dbunit\\Expected_Seller.xml"));
 		
-//		Assertion.assertEquals(expectedDataSet, currentDBdataSet);
-		assertLenientEquals(expectedDataSet,currentDBdataSet);
+		Assertion.assertEquals(expectedDataSet, currentDBdataSet);
+//		assertLenientEquals(expectedDataSet,currentDBdataSet);
 	}
 	
 	/**
-	 * Á¤·ÄÇÏ¿© ºñ±³
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½
 	 * @throws Exception
 	 */
 	@Test
 	public void testAddNewSellerDataSetSorted() throws Exception{
-		Seller newSeller = new Seller("yoo", "À¯ÅÂ¿¬", "yoo@gmail.com");
+		Seller newSeller = new Seller("yoo", "ìœ íƒœì—°", "yoo@gmail.com");
 		repository.add(newSeller);
 		
 		IDataSet currentDBdataSet = databaseTester.getConnection().createDataSet(new String[] {"seller"});
@@ -139,13 +145,13 @@ public class DatabaseRepositoryTest {
 	}
 	
 	/**
-	 * SQL¹® Á÷Á¢ ÀÛ¼º
+	 * SQLï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	 * @throws DataSetException
 	 * @throws Exception
 	 */
 	@Test
 	public void testQueryDataSet() throws DataSetException, Exception{
-		Seller newSeller = new Seller("yoo", "À¯ÅÂ¿¬", "yoo@gmail.com");
+		Seller newSeller = new Seller("yoo", "ìœ íƒœì—°", "yoo@gmail.com");
 		repository.add(newSeller);
 		
 		ITable actualTable =databaseTester.getConnection().createQueryTable("seller", "select * from seller");
@@ -160,8 +166,11 @@ public class DatabaseRepositoryTest {
 	
 	@Test
 	public void testAddNewSellerDataSetWithExcel() throws Exception{
-		Seller newSeller = new Seller("yoo", "À¯ÅÂ¿¬", "yoo@gmail.com");
+		Seller newSeller = new Seller("yoo", "ìœ íƒœì—°", "yoo@gmail.com");
 		repository.add(newSeller);
+		
+		Seller newSeller1 = new Seller("park", "ë°•ì€ì£¼", "park@gmail.com");
+		repository.add(newSeller1);
 		
 //		IDataSet currentDBdataSet = databaseTester.getConnection().createDataSet();
 //		ITable actualTable = currentDBdataSet.getTable("seller");

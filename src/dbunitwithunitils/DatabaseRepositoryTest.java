@@ -25,16 +25,26 @@ public class DatabaseRepositoryTest {
 	@Test
 	@ExpectedDataSet
 	public void testAddNewSeller() throws SQLException, InstantiationException,
-			IllegalAccessException, ClassNotFoundException {
-		Seller newSeller = new Seller("park", "╧зю╨аж", "park@gmail.com");
+		IllegalAccessException, ClassNotFoundException {
+		Seller newSeller = new Seller("park", "К╟∙Л²─Лё╪", "park@gmail.com");
+		Seller newSeller1 = new Seller("park1", "К╟∙Л²─Лё╪", "park@gmail.com");
 		Repository repository = new DatabaseRepository();
 		repository.add(newSeller);
+		
+		Repository repository1 = new DatabaseRepository();
+		repository1.add(newSeller1);
+		
+		Repository repository2 = new DatabaseRepository();
+		Seller actualSeller = repository2.findById("park");
+		
+//		assertPropertyLenientEquals("id", "park1", actualSeller);
+		assertPropertyLenientEquals("id", "park", actualSeller);
 
 	}
 	/*
 	 * 
 	 * @Test public void testAddNewSellerDataSet() throws Exception { Seller
-	 * newSeller = new Seller("yoo", "ю╞еб©╛", "yoo@gmail.com"); Repository
+	 * newSeller = new Seller("yoo", "О©╫О©╫О©╫б©О©╫", "yoo@gmail.com"); Repository
 	 * repository = new DatabaseRepository(); repository.add(newSeller);
 	 * 
 	 * // IDataSet currentDBdataSet = //
@@ -54,7 +64,7 @@ public class DatabaseRepositoryTest {
 	 * Assertion.assertEquals(expectedTable, actualTable1); }
 	 * 
 	 * @Test public void testAddNewSellerDataSetWithExcel() throws Exception {
-	 * Seller newSeller = new Seller("yoo", "ю╞еб©╛", "yoo@gmail.com"); Repository
+	 * Seller newSeller = new Seller("yoo", "О©╫О©╫О©╫б©О©╫", "yoo@gmail.com"); Repository
 	 * repository = new DatabaseRepository(); repository.add(newSeller);
 	 * 
 	 * // IDataSet currentDBdataSet = //
@@ -74,7 +84,7 @@ public class DatabaseRepositoryTest {
 	 * Assertion.assertEquals(expectedTable, actualTable1); }
 	 * 
 	 * @Test public void testQueryDataSet() throws DataSetException, Exception {
-	 * Seller newSeller = new Seller("yoo", "ю╞еб©╛", "yoo@gmail.com"); Repository
+	 * Seller newSeller = new Seller("yoo", "О©╫О©╫О©╫б©О©╫", "yoo@gmail.com"); Repository
 	 * repository = new DatabaseRepository(); repository.add(newSeller);
 	 * 
 	 * ITable actualTable = databaseTester.getConnection().createQueryTable(
