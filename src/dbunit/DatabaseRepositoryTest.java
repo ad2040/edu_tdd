@@ -169,8 +169,8 @@ public class DatabaseRepositoryTest {
 		Seller newSeller = new Seller("yoo", "유태연", "yoo@gmail.com");
 		repository.add(newSeller);
 		
-		Seller newSeller1 = new Seller("park", "박은주", "park@gmail.com");
-		repository.add(newSeller1);
+		//Seller newSeller1 = new Seller("park", "박은주", "park@gmail.com");
+		//repository.add(newSeller1);
 		
 //		IDataSet currentDBdataSet = databaseTester.getConnection().createDataSet();
 //		ITable actualTable = currentDBdataSet.getTable("seller");
