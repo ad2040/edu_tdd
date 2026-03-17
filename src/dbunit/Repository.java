@@ -3,11 +3,11 @@ package dbunit;
 import java.sql.SQLException;
 
 public interface Repository {
-	
-	public Seller findById(String id) throws SQLException;
-	public void add(Seller seller) throws SQLException;
-	public void update(Seller seller);
-	public void remove(Seller seller);
-	
+
+	Seller findById(String id) throws SQLException;
+	void add(Seller seller) throws SQLException;
+	void update(Seller seller) throws SQLException;
+	void remove(Seller seller) throws SQLException;
+
 
 }

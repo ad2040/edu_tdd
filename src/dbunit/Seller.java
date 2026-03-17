@@ -1,5 +1,7 @@
 package dbunit;
 
+import java.util.Objects;
+
 public class Seller {
 
 	private String email;
@@ -11,17 +13,30 @@ public class Seller {
 		this.name = name;
 		this.email = email;
 	}
-	
+
 	public String getId(){
 		return this.id;
 	}
-	
+
 	public String getName(){
 		return this.name;
 	}
-	
+
 	public String getEmail(){
 		return this.email;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Seller)) return false;
+		Seller s = (Seller) o;
+		return Objects.equals(id, s.id) && Objects.equals(name, s.name) && Objects.equals(email, s.email);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, name, email);
 	}
 
 }
