@@ -6,18 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DatabaseRepository implements Repository {
+public class DatabaseRepository implements Repository, AutoCloseable {
 
-	private final String clientDriver= "org.apache.derby.jdbc.ClientDriver";
-
+	private final String clientDriver = "org.apache.derby.jdbc.ClientDriver";
 	private final String url = "jdbc:derby://localhost:1527/Sellerdb;create=true;user=nam;pass=nam";
 	private Connection con;
 
-
-	public DatabaseRepository() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException{
-		Class.forName(clientDriver).newInstance();
+	public DatabaseRepository() throws SQLException, ClassNotFoundException {
+		Class.forName(clientDriver);
 		con = DriverManager.getConnection(url);
-		con.commit();
 	}
 
 	@Override
@@ -44,15 +41,20 @@ public class DatabaseRepository implements Repository {
 	}
 
 	@Override
-	public void update(Seller seller) {
-		// TODO Auto-generated method stub
-
+	public void update(Seller seller) throws SQLException {
+		throw new UnsupportedOperationException("update() not yet implemented");
 	}
 
 	@Override
-	public void remove(Seller seller) {
-		// TODO Auto-generated method stub
+	public void remove(Seller seller) throws SQLException {
+		throw new UnsupportedOperationException("remove() not yet implemented");
+	}
 
+	@Override
+	public void close() throws SQLException {
+		if (con != null && !con.isClosed()) {
+			con.close();
+		}
 	}
 
 }

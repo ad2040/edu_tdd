@@ -41,22 +41,18 @@ public class DatabaseRepositoryTest {
 	private Repository repository;
 
 	@Before
-	public void setUp() throws SQLException, Exception{
-		
+	public void setUp() throws Exception {
 		repository = new DatabaseRepository();
 		databaseTester = new JdbcDatabaseTester(clientDriver, url);
-	    try {
-			IDataSet dataSet = new FlatXmlDataSetBuilder().build(new File("src" + File.separator + "dbunit" + File.separator + "Seller.xml"));
-			DatabaseOperation.CLEAN_INSERT.execute(databaseTester.getConnection(), dataSet);
-		} catch (Exception e) {
-			System.out.println(e);
-		}finally{
-			//databaseTester.getConnection().close();
-		}
+		IDataSet dataSet = new FlatXmlDataSetBuilder().build(new File("src" + File.separator + "dbunit" + File.separator + "Seller.xml"));
+		DatabaseOperation.CLEAN_INSERT.execute(databaseTester.getConnection(), dataSet);
 	}
-	
+
 	@After
-	public void tearDown() throws SQLException, Exception{
+	public void tearDown() throws Exception {
+		if (repository instanceof AutoCloseable) {
+			((AutoCloseable) repository).close();
+		}
 		databaseTester.getConnection().close();
 	}
 	
@@ -67,17 +63,12 @@ public class DatabaseRepositoryTest {
 	
 	@Ignore("Seller.xml에 'lee' 데이터가 없어 항상 실패 - 데이터 추가 후 활성화 필요")
 	@Test
-	public void testFindById() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException{
-		Seller expectedSeller = new Seller("nam", "������", "ad2040@gmail.com");
+	public void testFindById() throws SQLException, ClassNotFoundException{
 		Seller expectedSeller1 = new Seller("kim", "����", "kim@gmail.com");
-		Seller expectedSeller2 = new Seller("lee", "������", "lee@gmail.com");
-		
-		
-		
+
 		Seller actualSeller = repository.findById("kim");
-		
-		assertLenientEquals(expectedSeller2, actualSeller);
-		
+
+		assertLenientEquals(expectedSeller1, actualSeller);
 	}
 	@Test
 	public void testAddNewSeller() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException{

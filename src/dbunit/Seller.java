@@ -39,4 +39,9 @@ public class Seller {
 		return Objects.hash(id, name, email);
 	}
 
+	@Override
+	public String toString() {
+		return "Seller{id='" + id + "', name='" + name + "', email='" + email + "'}";
+	}
+
 }
