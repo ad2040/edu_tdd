@@ -1,0 +1,21 @@
+== dbunit 리팩토링 요약 (2026-03-17) ==
+
+[DatabaseRepository.java]
+- driver 필드 제거 (미사용)
+- try-with-resources 적용 → 이중 close 버그 해결
+- rs.getString(1,2,3) → rs.getString("id","name","email") 컬럼명 접근
+- add()의 불필요한 ResultSet 변수 제거
+- e.printStackTrace() 제거 → 예외 자연 전파
+
+[Repository.java]
+- 인터페이스 메서드의 불필요한 public 키워드 제거
+- update(), remove()에 throws SQLException 추가
+
+[Seller.java]
+- equals() / hashCode() 구현 추가
+
+[DatabaseRepositoryTest.java]
+- 하드코딩 경로("src\\dbunit\\...") → File.separator 사용 (크로스플랫폼)
+- @Ignore 이유 명시
+- testAddNewSeller: 불필요한 새 인스턴스 생성 제거
+- testDatabaseOperationRefresh: refreshActualTable을 DB에서 직접 조회하도록 버그 수정
